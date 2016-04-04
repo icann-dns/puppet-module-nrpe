@@ -1,6 +1,6 @@
 #
 define nrpe::command (
-  $command,
+  $command      = undef,
   $ensure       = present,
   $include_dir  = $nrpe::include_dir,
   $package_name = $nrpe::package_name,
@@ -10,6 +10,7 @@ define nrpe::command (
   $sudo         = false,
   $sudo_user    = 'root',
 ) {
+  $sudo_path = $nrpe::params::sudo_path
 
   file { "${include_dir}/${title}.cfg":
     ensure  => $ensure,

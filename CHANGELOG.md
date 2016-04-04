@@ -10,6 +10,11 @@
 * make management of nrpe package optional
 * Use variable for title of service resource to be consistent
 * Allow other users than root to be sudoed
+=======
+2017-05-16 Release 2.0.1
+
+*allow NRPE to listen on IPv6 by default or to list multiple listening addresses
+
 
 2015-06-16 Release 2.0.0
 

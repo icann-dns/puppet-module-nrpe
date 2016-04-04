@@ -19,8 +19,8 @@
 # Copyright 2013 Computer Action Team, unless otherwise noted.
 #
 class nrpe (
-  $allowed_hosts = ['127.0.0.1'],
-  $server_address = '0.0.0.0',
+  $allowed_hosts   = ['127.0.0.1'],
+  $server_address  = undef,
   $command_timeout = 60,
   $config          = $nrpe::params::nrpe_config,
   $include_dir     = $nrpe::params::nrpe_include_dir,
@@ -53,6 +53,8 @@ class nrpe (
   $ssl_log_cipher              = false,
   $ssl_log_client_cert         = false,
   $ssl_log_client_cert_details = false,
+  $commands        = {},
+  $plugins         = {},
 ) inherits nrpe::params {
 
   if $manage_package {
@@ -116,5 +118,6 @@ class nrpe (
     recurse => $recurse,
     require => Package[$package_name],
   }
-
+  create_resources(nrpe::command, $commands)
+  create_resources(nrpe::plugin,  $plugins)
 }

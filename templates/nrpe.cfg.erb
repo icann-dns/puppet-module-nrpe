@@ -45,7 +45,9 @@ server_port=<%= @server_port %>
 # and you do not want nrpe to bind on all interfaces.
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-server_address=<%= @server_address %>
+<%- if @server_address -%>
+server_address=<%= @server_address.join(',') %>
+<%- end -%>
 
 
 
