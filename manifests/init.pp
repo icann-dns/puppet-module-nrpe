@@ -41,8 +41,10 @@ class nrpe (
   $nrpe_group      = $nrpe::params::nrpe_group,
   $nrpe_pid_file   = $nrpe::params::nrpe_pid_file,
   $nrpe_commands   = {}
+  $nrpe_plugins    = {}
 ) inherits nrpe::params {
   validate_hash($nrpe_commands)
+  validate_hash($nrpe_plugins)
 
   if $manage_package {
     package { $package_name:
@@ -73,4 +75,5 @@ class nrpe (
     require => Package[$package_name],
   }
   create_resources(nrpe::command, $nrpe_commands)
+  create_resources(nrpe::plugin,  $nrpe_plugins)
 }
