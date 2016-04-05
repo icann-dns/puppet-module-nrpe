@@ -1,6 +1,6 @@
 #
 define nrpe::command (
-  $command,
+  $command      = undef,
   $ensure       = present,
   $include_dir  = $nrpe::include_dir,
   $package_name = $nrpe::package_name,
