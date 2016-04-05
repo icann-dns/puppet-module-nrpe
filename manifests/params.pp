@@ -63,7 +63,7 @@ class nrpe::params {
       $nrpe_pid_file    = '/var/run/nrpe2/nrpe2.pid'
       $nrpe_config      = '/usr/local/etc/nrpe.cfg'
       $nrpe_include_dir = '/usr/local/etc/nrpe.d'
-      $nrpe_service     = 'nrpe'
+      $nrpe_service     = 'nrpe2'
       $nrpe_packages    = [
         'net-mgmt/nrpe-ssl',
         'net-mgmt/nagios-plugins',
