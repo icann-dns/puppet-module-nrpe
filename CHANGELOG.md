@@ -1,3 +1,8 @@
+2017-05-16 Release 2.0.1
+
+*allow NRPE to listen on IPv6 by default or to list multiple listening addresses
+
+
 2015-06-16 Release 2.0.0
 
 * Add Gentoo support.
