@@ -19,8 +19,8 @@
 # Copyright 2013 Computer Action Team, unless otherwise noted.
 #
 class nrpe (
-  $allowed_hosts = ['127.0.0.1'],
-  $server_address = '',
+  $allowed_hosts   = ['127.0.0.1'],
+  $server_address  = undef,
   $command_timeout = 60,
   $config          = $nrpe::params::nrpe_config,
   $include_dir     = $nrpe::params::nrpe_include_dir,

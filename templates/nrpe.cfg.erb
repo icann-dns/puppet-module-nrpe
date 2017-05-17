@@ -46,7 +46,7 @@ server_port=<%= @server_port %>
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
 <%- if @server_address -%>
-server_address=<%= @server_address %>
+server_address=<%= @server_address.join(',') %>
 <%- end -%>
 
 
