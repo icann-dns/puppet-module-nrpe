@@ -9,6 +9,7 @@ define nrpe::command (
   $file_group   = $nrpe::params::nrpe_files_group,
   $sudo         = false,
 ) {
+  $sudo_path = $nrpe::params::sudo_path
 
   file { "${include_dir}/${title}.cfg":
     ensure  => $ensure,

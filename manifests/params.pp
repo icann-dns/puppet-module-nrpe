@@ -16,6 +16,7 @@ class nrpe::params {
   case $::osfamily {
     'Debian':  {
       $libdir           = '/usr/lib/nagios/plugins'
+      $sudo_path        = '/usr/bin/sudo'
       $nrpe_user        = 'nagios'
       $nrpe_group       = 'nagios'
       $nrpe_pid_file    = '/var/run/nagios/nrpe.pid'
@@ -29,6 +30,7 @@ class nrpe::params {
     }
     'Solaris': {
       $libdir           = '/opt/csw/libexec/nagios-plugins'
+      $sudo_path        = '/usr/bin/sudo'
       $nrpe_user        = 'nagios'
       $nrpe_group       = 'nagios'
       $nrpe_pid_file    = '/var/run/nrpe.pid'
@@ -45,6 +47,7 @@ class nrpe::params {
         /x86_64/ => '/usr/lib64/nagios/plugins',
         default  => '/usr/lib/nagios/plugins',
       }
+      $sudo_path        = '/usr/bin/sudo'
       $nrpe_user        = 'nrpe'
       $nrpe_group       = 'nrpe'
       $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
@@ -58,6 +61,7 @@ class nrpe::params {
     }
     'FreeBSD': {
       $libdir           = '/usr/local/libexec/nagios'
+      $sudo_path        = '/usr/local/bin/sudo'
       $nrpe_user        = 'nagios'
       $nrpe_group       = 'nagios'
       $nrpe_pid_file    = '/var/run/nrpe2/nrpe2.pid'
@@ -71,6 +75,7 @@ class nrpe::params {
     }
     'OpenBSD': {
       $libdir           = '/usr/local/libexec/nagios'
+      $sudo_path        = '/usr/local/bin/sudo'
       $nrpe_user        = '_nrpe'
       $nrpe_group       = '_nrpe'
       $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
@@ -84,6 +89,7 @@ class nrpe::params {
     }
     'Suse':  {
       $libdir           = '/usr/lib/nagios/plugins'
+      $sudo_path        = '/usr/bin/sudo'
       $nrpe_user        = 'nagios'
       $nrpe_group       = 'nagios'
       $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
@@ -113,6 +119,7 @@ class nrpe::params {
         /x86_64/ => '/usr/lib64/nagios/plugins',
         default  => '/usr/lib/nagios/plugins',
       }
+      $sudo_path        = '/usr/bin/sudo'
       $nrpe_user        = 'nagios'
       $nrpe_group       = 'nagios'
       $nrpe_pid_file    = '/var/run/nrpe.pid'
