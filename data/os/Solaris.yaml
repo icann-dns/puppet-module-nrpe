@@ -1,0 +1,9 @@
+nrpe::config: /etc/opt/csw/nrpe.cfg
+nrpe::include_dir: /etc/opt/csw/nrpe.d
+nrpe::libdir: /opt/csw/libexec/nagios-plugins
+nrpe::packages:
+  - nrpe
+  - nagios-plugins
+nrpe::service_name: cswnrpe
+nrpe::pid_file: /var/run/nrpe.pid
+nrpe::ssl_dir: /etc/opt/csw/nrpe-ssl

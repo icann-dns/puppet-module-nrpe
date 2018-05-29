@@ -76,5 +76,8 @@
   "license": "Apache-2.0",
   "summary": "Puppet module for NRPE",
   "project_page": "https://github.com/pdxcat/puppet-module-nrpe",
-  "dependencies": []
+  "dependencies": [
+    {"name": "puppetlabs/stdlib", "version_requirement": ">=4.25.0 <5.0.0"}
+  ],
+  "data_provider": "hiera"
 }

@@ -1,0 +1,8 @@
+nrpe::include_dir: /etc/nrpe.d
+nrpe::packages:
+  - nrpe
+  - nagios-plugins-all
+nrpe::service_name: nrpe
+nrpe::user: nrpe
+nrpe::group: nrpe
+nrpe::pid_file: /var/run/nrpe/nrpe.pid

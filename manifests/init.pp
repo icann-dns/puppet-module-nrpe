@@ -19,92 +19,86 @@
 # Copyright 2013 Computer Action Team, unless otherwise noted.
 #
 class nrpe (
-  $allowed_hosts   = ['127.0.0.1'],
-  $server_address  = undef,
-  $command_timeout = 60,
-  $config          = $nrpe::params::nrpe_config,
-  $include_dir     = $nrpe::params::nrpe_include_dir,
-  $package_name    = $nrpe::params::nrpe_packages,
-  $provider        = $nrpe::params::nrpe_provider,
-  $manage_package  = true,
-  $purge           = undef,
-  $recurse         = undef,
-  $service_name    = $nrpe::params::nrpe_service,
-  $dont_blame_nrpe = $nrpe::params::dont_blame_nrpe,
-  $log_facility    = $nrpe::params::log_facility,
-  $server_port     = $nrpe::params::server_port,
-  $command_prefix  = $nrpe::params::command_prefix,
-  $debug           = $nrpe::params::debug,
-  $connection_timeout = $nrpe::params::connection_timeout,
-  $allow_bash_command_substitution = $nrpe::params::allow_bash_command_substitution,
-  $nrpe_user       = $nrpe::params::nrpe_user,
-  $nrpe_group      = $nrpe::params::nrpe_group,
-  $nrpe_pid_file   = $nrpe::params::nrpe_pid_file,
-  $nrpe_ssl_dir    = $nrpe::params::nrpe_ssl_dir,
-  $ssl_cert_file_content       = undef,
-  $ssl_privatekey_file_content = undef,
-  $ssl_cacert_file_content     = undef,
-  $ssl_version                 = $nrpe::params::ssl_version,
-  $ssl_ciphers                 = $nrpe::params::ssl_ciphers,
-  $ssl_client_certs            = $nrpe::params::ssl_client_certs,
-  $ssl_log_startup_params      = false,
-  $ssl_log_remote_ip           = false,
-  $ssl_log_protocol_version    = false,
-  $ssl_log_cipher              = false,
-  $ssl_log_client_cert         = false,
-  $ssl_log_client_cert_details = false,
-  $commands        = {},
-  $plugins         = {},
-) inherits nrpe::params {
+  Array[Stdlib::Ip::Address]    $allowed_hosts,
+  Optional[Stdlib::Ip::Address] $server_address,
+  Integer[1]                    $command_timeout,
+  Stdlib::Absolutepath          $config,
+  Stdlib::Absolutepath          $include_dir,
+  Stdlib::Absolutepath          $libdir,
+  Stdlib::Absolutepath          $sudo_path,
+  Array[String]                 $packages,
+  Boolean                       $manage_package,
+  Boolean                       $purge,
+  Boolean                       $recurse,
+  String                        $service_name,
+  Integer[0,1]                  $dont_blame_nrpe,
+  String                        $log_facility,
+  Stdlib::Port                  $server_port,
+  Optional[String]              $command_prefix,
+  Integer[0,1]                  $debug,
+  Integer[1]                    $connection_timeout,
+  Optional[Integer[0,1]]        $allow_bash_command_substitution,
+  String                        $user,
+  String                        $group,
+  Stdlib::Absolutepath          $pid_file,
+  Stdlib::Absolutepath          $ssl_dir,
+  Optional[String]              $ssl_cert_file_content,
+  Optional[String]              $ssl_privatekey_file_content,
+  Optional[String]              $ssl_cacert_file_content,
+  String                        $ssl_version,
+  Array[String]                 $ssl_ciphers,
+  Integer[0,2]                  $ssl_client_certs,
+  Boolean                       $ssl_log_startup_params,
+  Boolean                       $ssl_log_remote_ip,
+  Boolean                       $ssl_log_protocol_version,
+  Boolean                       $ssl_log_cipher,
+  Boolean                       $ssl_log_client_cert,
+  Boolean                       $ssl_log_client_cert_details,
+  Optional[Hash]                $commands,
+  Optional[Hash]                $plugins,
+) {
 
-  if $manage_package {
-    package { $package_name:
-      ensure   => installed,
-      provider => $provider,
-    }
-  }
+  if $manage_package { ensure_packages($packages) }
 
   service { $service_name:
     ensure    => running,
-    name      => $service_name,
     enable    => true,
-    require   => Package[$package_name],
-    subscribe => File['nrpe_config'],
+    require   => Package[$packages],
+    subscribe => File[$config],
   }
 
-  file { 'nrpe_config':
-    name    => $config,
+  file { $config:
     content => template('nrpe/nrpe.cfg.erb'),
     require => File['nrpe_include_dir'],
   }
 
   if $ssl_cert_file_content {
-    file { $nrpe_ssl_dir:
+    file { $ssl_dir:
       ensure => directory,
       owner  => 'root',
-      group  => $nrpe_group,
+      group  => $group,
       mode   => '0750',
     }
-    file { "${nrpe_ssl_dir}/ca-cert.pem":
+    file { "${ssl_dir}/ca-cert.pem":
       ensure  => file,
       owner   => 'root',
-      group   => $nrpe_group,
+      group   => $group,
       mode    => '0640',
       content => $ssl_cacert_file_content,
       notify  => Service[$service_name],
     }
-    file { "${nrpe_ssl_dir}/nrpe-cert.pem":
+    file { "${ssl_dir}/nrpe-cert.pem":
       ensure  => file,
       owner   => 'root',
-      group   => $nrpe_group,
+      group   => $group,
       mode    => '0640',
       content => $ssl_cert_file_content,
       notify  => Service[$service_name],
     }
-    file { "${nrpe_ssl_dir}/nrpe-key.pem":
+    file { "${ssl_dir}/nrpe-key.pem":
       ensure  => file,
       owner   => 'root',
-      group   => $nrpe_group,
+      group   => $group,
       mode    => '0640',
       content => $ssl_privatekey_file_content,
       notify  => Service[$service_name],
@@ -116,8 +110,8 @@ class nrpe (
     name    => $include_dir,
     purge   => $purge,
     recurse => $recurse,
-    require => Package[$package_name],
+    require => Package[$packages],
   }
-  create_resources(nrpe::command, $commands)
-  create_resources(nrpe::plugin,  $plugins)
+  if $commands { create_resources(nrpe::command, $commands) }
+  if $plugins { create_resources(nrpe::plugin,  $plugins) }
 }

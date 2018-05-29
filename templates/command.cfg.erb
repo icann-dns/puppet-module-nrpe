@@ -2,5 +2,5 @@
 <%- if @command.start_with?("/") -%>
 command[<%= @name %>]=<% if @sudo == true %><%= @sudo_path %> <% end %><%= @command %>
 <%- else -%>
-command[<%= @name %>]=<% if @sudo == true %><%= @sudo_path %> <% end %><%= @libdir %>/<%= @command %>
+command[<%= @name %>]=<% if @sudo == true %><%= @sudo_path %> <% end %><%= @_libdir %>/<%= @command %>
 <%- end -%>

@@ -1,0 +1,12 @@
+nrpe::config: /etc/nrpe.cfg
+nrpe::include_dir: /etc/nrpe.d
+nrpe::libdir: /usr/local/libexec/nagios
+nrpe::sudo_path: /usr/local/bin/sudo
+nrpe::packages:
+  - nrpe
+  - monitoring-plugins
+nrpe::service_name: nrpe
+nrpe::user: _nrpe
+nrpe::group: _nrpe
+nrpe::pid_file: /var/run/nrpe/nrpe.pid
+nrpe::ssl_dir: /etc/nrpe-ssl

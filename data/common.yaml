@@ -1,0 +1,46 @@
+nrpe::allowed_hosts:
+  - 127.0.0.1
+nrpe::server_address: ~
+nrpe::command_timeout: 60
+nrpe::config: /etc/nagios/nrpe.cfg
+nrpe::include_dir: /etc/nagios/nrpe.d
+nrpe::libdir: /usr/lib/nagios/plugins
+nrpe::sudo_path: /usr/bin/sudo
+nrpe::packages:
+  - nagios-nrpe-server
+  - nagios-plugins
+nrpe::manage_package: true
+nrpe::purge: false
+nrpe::recurse: false
+nrpe::service_name: nagios-nrpe-server
+nrpe::dont_blame_nrpe: 0
+nrpe::log_facility: daemon
+nrpe::server_port: 5666
+nrpe::command_prefix: ~
+nrpe::debug: 0
+nrpe::connection_timeout: 300
+nrpe::allow_bash_command_substitution: ~
+nrpe::user: nagios
+nrpe::group: nagios
+nrpe::pid_file: /var/run/nagios/nrpe.pid
+nrpe::ssl_dir: /etc/nagios/nrpe-ssl
+nrpe::ssl_cert_file_content: ~
+nrpe::ssl_privatekey_file_content: ~
+nrpe::ssl_cacert_file_content: ~
+nrpe::ssl_version: TLSv1.2+
+nrpe::ssl_ciphers:
+  - DHE-RSA-AES128-GCM-SHA256
+  - DHE-RSA-AES256-GCM-SHA384
+  - DHE-RSA-AES128-SHA
+  - DHE-RSA-AES256-SHA
+  - DHE-RSA-AES128-SHA256
+  - DHE-RSA-AES256-SHA256
+nrpe::ssl_client_certs: 1
+nrpe::ssl_log_startup_params: false
+nrpe::ssl_log_remote_ip: false
+nrpe::ssl_log_protocol_version: false
+nrpe::ssl_log_cipher: false
+nrpe::ssl_log_client_cert: false
+nrpe::ssl_log_client_cert_details: false
+nrpe::commands: ~
+nrpe::plugins: ~

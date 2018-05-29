@@ -1,0 +1,5 @@
+nrpe::packages:
+  - net-analyzer/nrpe
+  - net-analyzer/nagios-plugins
+nrpe::service_name: nrpe
+nrpe::pid_file: /var/run/nrpe.pid

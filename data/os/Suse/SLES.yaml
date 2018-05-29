@@ -1,0 +1,7 @@
+nrpe::config: /etc/nagios/nrpe.cfg
+nrpe::include_dir: /etc/nagios/nrpe.d
+nrpe::packages:
+  - nagios-nrpe
+  - nagios-plugins
+  - nagios-plugins-nrpe
+nrpe::ssl_dir: /etc/nagios/nrpe-ssl

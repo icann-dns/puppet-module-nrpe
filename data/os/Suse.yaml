@@ -1,0 +1,8 @@
+nrpe::config: /etc/nrpe.cfg
+nrpe::include_dir: /etc/nrpe.d
+nrpe::packages:
+  - nrpe
+  - nagios-plugins-all
+nrpe::service_name: nrpe
+nrpe::pid_file: /var/run/nrpe/nrpe.pid
+nrpe::ssl_dir: /etc/nrpe-ssl

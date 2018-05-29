@@ -1,25 +1,31 @@
 #
 define nrpe::command (
-  $command      = undef,
-  $ensure       = present,
-  $include_dir  = $nrpe::include_dir,
-  $package_name = $nrpe::package_name,
-  $service_name = $nrpe::service_name,
-  $libdir       = $nrpe::params::libdir,
-  $file_group   = $nrpe::params::nrpe_files_group,
-  $sudo         = false,
-  $sudo_user    = 'root',
+  String                         $command,
+  String                         $ensure      = 'present',
+  Boolean                        $sudo        = false,
+  String                         $sudo_user   = 'root',
+  Optional[Stdlib::Absolutepath] $include_dir = undef,
+  Optional[Stdlib::Absolutepath] $libdir      = undef,
 ) {
+  include nrpe
+  $_include_dir = $include_dir ? {
+    undef   => $nrpe::include_dir,
+    default => $include_dir,
+  }
+  $_libdir = $libdir ? {
+    undef   => $nrpe::libdir,
+    default => $libdir,
+  }
   $sudo_path = $nrpe::params::sudo_path
 
-  file { "${include_dir}/${title}.cfg":
+  file { "${_include_dir}/${title}.cfg":
     ensure  => $ensure,
     content => template('nrpe/command.cfg.erb'),
     owner   => 'root',
-    group   => $file_group,
+    group   => $nrpe::group,
     mode    => '0644',
-    require => Package[$package_name],
-    notify  => Service[$service_name],
+    require => Package[$nrpe::packages],
+    notify  => Service[$nrpe::service_name],
   }
 
 }
