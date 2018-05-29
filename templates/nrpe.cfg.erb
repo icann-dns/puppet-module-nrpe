@@ -27,7 +27,7 @@ log_facility=<%= @log_facility %>
 # number.  The file is only written if the NRPE daemon is started by the root
 # user and is running in standalone mode.
 
-pid_file=<%= @nrpe_pid_file %>
+pid_file=<%= @pid_file %>
 
 
 
@@ -57,7 +57,7 @@ server_address=<%= @server_address.join(',') %>
 #
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-nrpe_user=<%= @nrpe_user %>
+nrpe_user=<%= @user %>
 
 
 
@@ -67,7 +67,7 @@ nrpe_user=<%= @nrpe_user %>
 #
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-nrpe_group=<%= @nrpe_group %>
+nrpe_group=<%= @group %>
 
 
 
@@ -214,9 +214,9 @@ ssl_cipher_list=<%= @ssl_ciphers.join(':') %>
 
 # SSL Certificate and Private Key Files
 
-ssl_cacert_file=<%= @nrpe_ssl_dir%>/ca-cert.pem
-ssl_cert_file=<%= @nrpe_ssl_dir%>/nrpe-cert.pem
-ssl_privatekey_file=<%= @nrpe_ssl_dir%>/nrpe-key.pem
+ssl_cacert_file=<%= @ssl_dir%>/ca-cert.pem
+ssl_cert_file=<%= @ssl_dir%>/nrpe-cert.pem
+ssl_privatekey_file=<%= @ssl_dir%>/nrpe-key.pem
 
 # SSL USE CLIENT CERTS
 # This options determines client certificate usage.
