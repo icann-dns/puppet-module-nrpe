@@ -16,7 +16,7 @@ define nrpe::command (
     undef   => $nrpe::libdir,
     default => $libdir,
   }
-  $sudo_path = $nrpe::params::sudo_path
+  $sudo_path = $nrpe::sudo_path
 
   file { "${_include_dir}/${title}.cfg":
     ensure  => $ensure,
