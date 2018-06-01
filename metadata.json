@@ -70,7 +70,7 @@
     }
   ],
   "name": "pdxcat-nrpe",
-  "version": "3.0.1",
+  "version": "3.0.3",
   "source": "https://github.com/pdxcat/puppet-module-nrpe",
   "author": "Computer Action Team",
   "license": "Apache-2.0",

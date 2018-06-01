@@ -1,3 +1,6 @@
+2018-06-01 Release 3.0.3
+ * upgrade puppet and use hiera version 5
+
 2016-06-09 Release 2.1.1
 
 * Fix file perms
